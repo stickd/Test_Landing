@@ -1,22 +1,29 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 interface HeroProps {
   onScroll: (id: string) => void;
 }
 
 export default function Hero({ onScroll }: HeroProps) {
+  const { scrollY } = useScroll();
+
+  // Плавный параллакс-фон
+  const parallaxY = useTransform(scrollY, [0, 400], [0, 120]);
+
   return (
     <section
       id="home"
       className="relative h-screen w-full flex flex-col items-center justify-center text-center overflow-hidden px-4 sm:px-6"
     >
-      {/* Background image + overlay */}
-      <div
+      {/* Параллакс Background */}
+      <motion.div
+        style={{ y: parallaxY, backgroundImage: "url('/1.png')" }}
         className="absolute top-0 left-0 w-full h-full bg-cover bg-center z-0"
-        style={{ backgroundImage: "url('/1.png')" }}
       />
+
+      {/* Overlay */}
       <div className="absolute top-0 left-0 w-full h-full bg-black/50 z-10" />
 
       {/* Hero content */}
@@ -26,7 +33,11 @@ export default function Hero({ onScroll }: HeroProps) {
         animate="visible"
         variants={{
           hidden: { opacity: 0, y: 20 },
-          visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.2 } },
+          visible: {
+            opacity: 1,
+            y: 0,
+            transition: { staggerChildren: 0.2 },
+          },
         }}
       >
         <motion.h1
