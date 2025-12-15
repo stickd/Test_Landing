@@ -69,22 +69,22 @@ export default function Features() {
   const features = [
     {
       title: "Low-Latency Monitoring",
-      text: "Record with zero delay — ideal for vocals, guitars, and beatmakers.",
+      text: "Record with zero delay — perfect for vocals, guitars, and synths.",
       icon: icons[0],
     },
     {
       title: "High-Gain Preamps",
-      text: "Clean, powerful amplification — perfect for any microphone or instrument.",
+      text: "Clean and strong amplification — ideal for any mic or instrument.",
       icon: icons[1],
     },
     {
-      title: "Ultra Portable",
-      text: "Small body, premium components — take your studio anywhere.",
+      title: "Ultra Portable Design",
+      text: "Compact design with premium components — take your studio anywhere.",
       icon: icons[2],
     },
     {
       title: "Cross-Platform Support",
-      text: "Works seamlessly with Mac, Windows, iPhone and iPad.",
+      text: "Works smoothly with Mac, Windows, iPhone, iPad, and other devices.",
       icon: icons[3],
     },
   ];
