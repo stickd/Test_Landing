@@ -5,9 +5,14 @@ import { motion } from "framer-motion";
 interface FeatureCardProps {
   title: string;
   text: string;
+  className?: string; // добавляем опционально
 }
 
-export default function FeatureCard({ title, text }: FeatureCardProps) {
+export default function FeatureCard({
+  title,
+  text,
+  className,
+}: FeatureCardProps) {
   return (
     <motion.div
       whileHover={{
@@ -15,7 +20,9 @@ export default function FeatureCard({ title, text }: FeatureCardProps) {
         scale: 1.02,
         transition: { duration: 0.05 },
       }}
-      className="p-4 sm:p-6 bg-white/5 rounded-2xl border border-white/10"
+      className={`p-4 sm:p-6 bg-white/5 rounded-2xl border border-white/10 ${
+        className || ""
+      }`}
     >
       <h3 className="text-lg sm:text-xl font-semibold mb-2">{title}</h3>
       <p className="text-gray-300 text-sm sm:text-base">{text}</p>

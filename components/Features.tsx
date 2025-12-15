@@ -34,7 +34,7 @@ const icons = [
     />
   </svg>,
 
-  // Портфель для Ultra Portable (новый)
+  // Портфель для Ultra Portable
   <svg
     className="w-10 h-10 text-red-500"
     fill="none"
@@ -49,7 +49,7 @@ const icons = [
     />
   </svg>,
 
-  // Кросс-платформа (устройство/окно) для Cross-Platform Support
+  // Кросс-платформа (устройство/окно)
   <svg
     className="w-10 h-10 text-red-500"
     fill="none"
