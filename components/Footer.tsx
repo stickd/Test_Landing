@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Footer() {
   const [loading, setLoading] = useState(false);
@@ -11,7 +11,7 @@ export default function Footer() {
     setLoading(true);
     setStatus(null);
 
-    const form = e.currentTarget as HTMLFormElement; // типизируем явно
+    const form = e.currentTarget as HTMLFormElement;
     const formData = new FormData(form);
 
     try {
@@ -27,7 +27,7 @@ export default function Footer() {
 
       if (res.ok) {
         setStatus("success");
-        form.reset(); // теперь TypeScript понимает, что это HTMLFormElement
+        form.reset();
       } else {
         setStatus("error");
       }
@@ -61,38 +61,59 @@ export default function Footer() {
             type="text"
             placeholder="Your Name"
             required
-            className="p-2 sm:p-3 rounded-lg border border-gray-600 bg-black text-white"
+            className="p-2 sm:p-3 rounded-lg border border-gray-600 bg-black text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
           />
           <input
             name="email"
             type="email"
             placeholder="Email"
             required
-            className="p-2 sm:p-3 rounded-lg border border-gray-600 bg-black text-white"
+            className="p-2 sm:p-3 rounded-lg border border-gray-600 bg-black text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
           />
           <textarea
             name="message"
             placeholder="Message"
             required
-            className="p-2 sm:p-3 rounded-lg border border-gray-600 bg-black text-white"
+            className="p-2 sm:p-3 rounded-lg border border-gray-600 bg-black text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
           />
 
-          <button
+          <motion.button
             type="submit"
             disabled={loading}
-            className="px-4 sm:px-8 py-2 sm:py-3 bg-white text-black hover:bg-gray-200 rounded-xl font-semibold transition shadow-md hover:scale-105 disabled:opacity-50"
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0 0 15px rgba(255,0,0,0.6)",
+            }}
+            whileTap={{ scale: 0.95 }}
+            className="px-4 sm:px-8 py-2 sm:py-3 bg-white text-black hover:bg-gray-200 rounded-xl font-semibold transition shadow-md w-full sm:w-auto disabled:opacity-50"
           >
             {loading ? "Sending..." : "Send"}
-          </button>
+          </motion.button>
 
-          {status === "success" && (
-            <p className="text-green-400 mt-2">✔ Message sent successfully!</p>
-          )}
-          {status === "error" && (
-            <p className="text-red-500 mt-2">
-              ❌ Failed to send message. Please try again.
-            </p>
-          )}
+          <AnimatePresence>
+            {status === "success" && (
+              <motion.p
+                key="success"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                className="text-green-400 mt-2 flex items-center justify-center gap-2"
+              >
+                ✔ Message sent successfully!
+              </motion.p>
+            )}
+            {status === "error" && (
+              <motion.p
+                key="error"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                className="text-red-500 mt-2 flex items-center justify-center gap-2"
+              >
+                ❌ Failed to send message. Please try again.
+              </motion.p>
+            )}
+          </AnimatePresence>
         </form>
 
         <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-6 text-sm sm:text-base">
