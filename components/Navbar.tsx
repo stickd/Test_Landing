@@ -1,9 +1,10 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface NavbarProps {
-  onScroll: (id: string) => void;
+  onScroll?: (id: string) => void;
 }
 
 export default function Navbar({ onScroll }: NavbarProps) {
@@ -21,15 +22,11 @@ export default function Navbar({ onScroll }: NavbarProps) {
       const scrolled = (scrollTop / docHeight) * 100;
       setScrollProgress(scrolled);
 
-      // Определяем текущую секцию
       let current = "home";
       sections.forEach((section) => {
         const el = document.getElementById(section);
-        if (el) {
-          const offsetTop = el.offsetTop;
-          if (scrollTop >= offsetTop - window.innerHeight / 2) {
-            current = section;
-          }
+        if (el && scrollTop >= el.offsetTop - window.innerHeight / 2) {
+          current = section;
         }
       });
       setActiveSection(current);
@@ -49,12 +46,16 @@ export default function Navbar({ onScroll }: NavbarProps) {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-black/60 backdrop-blur-md z-50 py-4 px-4 sm:px-0 shadow-lg">
+    <nav
+      className="fixed top-0 left-0 w-full z-50 py-4 px-4 sm:px-0
+                 bg-white/30 backdrop-blur-lg shadow-lg border-b border-white/20 transition-colors duration-500"
+    >
       {/* Scroll Progress Bar */}
       <div className="absolute top-0 left-0 w-full h-1 bg-white/20 z-[100]">
         <motion.div
           className="h-full bg-red-500 origin-left"
           style={{ scaleX: scrollProgress / 100 }}
+          transition={{ ease: "easeOut", duration: 0.3 }}
         />
       </div>
 
@@ -71,13 +72,13 @@ export default function Navbar({ onScroll }: NavbarProps) {
             <button
               key={section}
               onClick={() => handleClick(section)}
-              className={`group relative font-extrabold tracking-wide uppercase text-xl transition-all ${
-                isActive
-                  ? "text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
-                  : "text-white/80 hover:text-red-500 hover:drop-shadow-[0_0_4px_rgba(255,255,255,0.5)]"
-              }`}
+              className={`group relative font-extrabold tracking-wide uppercase text-xl transition-all duration-300
+                ${
+                  isActive ? "text-red-500" : "text-black/80 hover:text-red-500"
+                }`}
             >
               {label}
+              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-1 bg-red-500 rounded-full group-hover:w-full transition-all duration-300"></span>
             </button>
           );
         })}
@@ -85,10 +86,10 @@ export default function Navbar({ onScroll }: NavbarProps) {
 
       {/* Mobile */}
       <div className="sm:hidden flex justify-between items-center max-w-6xl mx-auto relative z-10">
-        <div className="text-white font-bold text-xl">NordWave</div>
+        <div className="text-black font-bold text-xl">NordWave</div>
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="text-white text-3xl"
+          className="text-black text-3xl"
           aria-label="Toggle menu"
         >
           {menuOpen ? "✕" : "☰"}
@@ -102,7 +103,7 @@ export default function Navbar({ onScroll }: NavbarProps) {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="sm:hidden absolute top-full left-0 w-full bg-black/95 flex flex-col items-center gap-6 py-6 z-40"
+            className="sm:hidden absolute top-full left-0 w-full bg-white/90 backdrop-blur-md flex flex-col items-center gap-6 py-6 z-40 rounded-b-lg shadow-lg"
           >
             {sections.map((section) => {
               const label =
@@ -115,11 +116,12 @@ export default function Navbar({ onScroll }: NavbarProps) {
                 <button
                   key={section}
                   onClick={() => handleClick(section)}
-                  className={`text-lg font-semibold transition-all ${
-                    isActive
-                      ? "text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.7)]"
-                      : "text-white/80 hover:text-red-500 hover:drop-shadow-[0_0_4px_rgba(255,255,255,0.5)]"
-                  }`}
+                  className={`text-lg font-semibold transition-all duration-300
+                    ${
+                      isActive
+                        ? "text-red-500"
+                        : "text-black/70 hover:text-red-500"
+                    }`}
                 >
                   {label}
                 </button>

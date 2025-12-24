@@ -45,14 +45,12 @@ export default function Footer() {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="bg-black text-white py-10 sm:py-12 px-4 relative overflow-hidden"
+      className="py-10 sm:py-12 px-4 relative overflow-hidden"
+      style={{
+        background: "linear-gradient(to bottom, #9ca3af, #ffffff)", // переход серый -> белый
+      }}
     >
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-10 -z-10"
-        style={{ backgroundImage: "url('/footer-bg.jpg')" }}
-      />
-
-      <div className="max-w-xs sm:max-w-6xl mx-auto text-center text-gray-400 space-y-6 relative z-10">
+      <div className="max-w-xs sm:max-w-6xl mx-auto text-center text-black space-y-6 relative z-10">
         <p>&copy; 2025 NordWave. All rights reserved.</p>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-2 sm:gap-4">
@@ -61,20 +59,20 @@ export default function Footer() {
             type="text"
             placeholder="Your Name"
             required
-            className="p-2 sm:p-3 rounded-lg border border-gray-600 bg-black text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
+            className="p-2 sm:p-3 rounded-lg border border-gray-600 bg-white text-black focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
           />
           <input
             name="email"
             type="email"
             placeholder="Email"
             required
-            className="p-2 sm:p-3 rounded-lg border border-gray-600 bg-black text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
+            className="p-2 sm:p-3 rounded-lg border border-gray-600 bg-white text-black focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
           />
           <textarea
             name="message"
             placeholder="Message"
             required
-            className="p-2 sm:p-3 rounded-lg border border-gray-600 bg-black text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
+            className="p-2 sm:p-3 rounded-lg border border-gray-600 bg-white text-black focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
           />
 
           <motion.button
@@ -85,7 +83,7 @@ export default function Footer() {
               boxShadow: "0 0 15px rgba(255,0,0,0.6)",
             }}
             whileTap={{ scale: 0.95 }}
-            className="px-4 sm:px-8 py-2 sm:py-3 bg-white text-black hover:bg-gray-200 rounded-xl font-semibold transition shadow-md w-full sm:w-auto disabled:opacity-50"
+            className="px-4 sm:px-8 py-2 sm:py-3 bg-red-600 text-white hover:bg-red-700 rounded-xl font-semibold transition shadow-md w-full sm:w-auto disabled:opacity-50"
           >
             {loading ? "Sending..." : "Send"}
           </motion.button>
@@ -97,7 +95,7 @@ export default function Footer() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
-                className="text-green-400 mt-2 flex items-center justify-center gap-2"
+                className="text-green-600 mt-2 flex items-center justify-center gap-2"
               >
                 ✔ Message sent successfully!
               </motion.p>
@@ -117,13 +115,13 @@ export default function Footer() {
         </form>
 
         <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-6 text-sm sm:text-base">
-          <a href="#" className="hover:text-white transition">
+          <a href="#" className="hover:text-red-700 transition">
             Privacy Policy
           </a>
-          <a href="#" className="hover:text-white transition">
+          <a href="#" className="hover:text-red-700 transition">
             Terms of Service
           </a>
-          <a href="#" className="hover:text-white transition">
+          <a href="#" className="hover:text-red-700 transition">
             Contact
           </a>
         </div>

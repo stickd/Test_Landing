@@ -84,45 +84,25 @@ export default function Features() {
     },
     {
       title: "Cross-Platform Support",
-      text: "Works smoothly with Mac, Windows, iPhone, iPad, and other devices.",
+      text: "Works smoothly with Mac, Windows, iOS and more.",
       icon: icons[3],
     },
   ];
 
   return (
-    <motion.section
+    <section
       id="features"
-      className="bg-gradient-to-b from-black via-gray-900/80 to-black text-white py-10 sm:py-20 px-4 relative overflow-hidden"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8 }}
+      className="bg-gradient-to-b from-black via-gray-900/80 to-black text-white py-20 px-4"
     >
-      <h2 className="text-2xl sm:text-4xl font-bold text-center mb-10 sm:mb-14 px-2">
+      <h2 className="text-4xl font-bold text-center mb-14">
         Why NordWave Mini?
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 max-w-6xl mx-auto px-2 auto-rows-fr">
-        {features.map((feature, index) => (
-          <motion.div
-            key={index}
-            whileHover={{
-              scale: 1.05,
-              rotateX: 2,
-              rotateY: 2,
-              boxShadow: "0 0 30px rgba(255,255,255,0.15)",
-            }}
-            className="relative rounded-xl bg-black/20 p-6 text-center shadow-lg transition-all duration-300 flex flex-col h-full"
-          >
-            <div className="mb-4 flex justify-center">{feature.icon}</div>
-            <FeatureCard
-              title={feature.title}
-              text={feature.text}
-              className="mt-auto"
-            />
-          </motion.div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+        {features.map((f, i) => (
+          <FeatureCard key={i} {...f} />
         ))}
       </div>
-    </motion.section>
+    </section>
   );
 }
