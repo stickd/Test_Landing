@@ -45,12 +45,9 @@ export default function Footer() {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="py-10 sm:py-12 px-4 relative overflow-hidden"
-      style={{
-        background: "linear-gradient(to bottom, #9ca3af, #ffffff)", // переход серый -> белый
-      }}
+      className="bg-black text-white py-10 sm:py-12 px-4 relative overflow-hidden"
     >
-      <div className="max-w-xs sm:max-w-6xl mx-auto text-center text-black space-y-6 relative z-10">
+      <div className="max-w-xs sm:max-w-6xl mx-auto text-center text-gray-400 space-y-6 relative z-10">
         <p>&copy; 2025 NordWave. All rights reserved.</p>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-2 sm:gap-4">
@@ -59,20 +56,20 @@ export default function Footer() {
             type="text"
             placeholder="Your Name"
             required
-            className="p-2 sm:p-3 rounded-lg border border-gray-600 bg-white text-black focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
+            className="p-2 sm:p-3 rounded-lg border border-gray-600 bg-black text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
           />
           <input
             name="email"
             type="email"
             placeholder="Email"
             required
-            className="p-2 sm:p-3 rounded-lg border border-gray-600 bg-white text-black focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
+            className="p-2 sm:p-3 rounded-lg border border-gray-600 bg-black text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
           />
           <textarea
             name="message"
             placeholder="Message"
             required
-            className="p-2 sm:p-3 rounded-lg border border-gray-600 bg-white text-black focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
+            className="p-2 sm:p-3 rounded-lg border border-gray-600 bg-black text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
           />
 
           <motion.button

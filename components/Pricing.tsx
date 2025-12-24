@@ -31,6 +31,7 @@ export default function Pricing() {
   const tiers = [
     {
       name: "NordWave Mini v2",
+      oldPrice: "$299",
       price: "$249",
       features: [
         "Studio-quality audio",
@@ -40,6 +41,7 @@ export default function Pricing() {
     },
     {
       name: "NordWave Mini Pro",
+      oldPrice: "$399",
       price: "$349",
       featured: true,
       features: [
@@ -50,6 +52,7 @@ export default function Pricing() {
     },
     {
       name: "NordWave Mini Bundle",
+      oldPrice: "$499",
       price: "$449",
       features: [
         "Pro features",
@@ -66,9 +69,9 @@ export default function Pricing() {
       style={{
         background: `linear-gradient(
           to bottom,
-          #000000 0%,    /* черный сверху */
-          #4b5563 50%,   /* средний серый */
-          #9ca3af 100%   /* светло-серый внизу */
+          #000000 0%,
+          #4b5563 50%,
+          #9ca3af 100%
         )`,
       }}
     >
@@ -101,10 +104,17 @@ export default function Pricing() {
             )}
 
             <div>
-              <h3 className="text-2xl font-semibold mb-4 text-black">
+              <h3 className="text-2xl font-semibold mb-2 text-black">
                 {tier.name}
               </h3>
-              <p className="text-lg mb-6 opacity-80 text-black">{tier.price}</p>
+
+              {/* Цена со скидкой */}
+              <p className="text-lg mb-6">
+                <span className="line-through text-gray-400 mr-2">
+                  {tier.oldPrice}
+                </span>
+                <span className="text-red-600 font-bold">{tier.price}</span>
+              </p>
 
               <ul className="text-sm space-y-2 mb-6 text-black">
                 {tier.features.map((f, idx) => (
