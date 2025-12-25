@@ -9,6 +9,7 @@ interface NavbarProps {
 
 export default function Navbar({ onScroll }: NavbarProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState("home");
   const sections = ["home", "features", "pricing", "footer"];
 
   useEffect(() => {
@@ -20,6 +21,15 @@ export default function Navbar({ onScroll }: NavbarProps) {
 
       const scrolled = (scrollTop / docHeight) * 100;
       setScrollProgress(scrolled);
+
+      let current = "home";
+      sections.forEach((section) => {
+        const el = document.getElementById(section);
+        if (el && scrollTop >= el.offsetTop - window.innerHeight / 2) {
+          current = section;
+        }
+      });
+      setActiveSection(current);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -27,35 +37,44 @@ export default function Navbar({ onScroll }: NavbarProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleClick = (section: string) => {
+    const el = document.getElementById(section);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
-      {/* Scroll Progress Bar — видна всегда, даже на мобильных */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-white/20 z-[100]">
+      {/* Scroll Progress Bar — всегда видна */}
+      <div className="fixed top-0 left-0 w-full h-1 bg-black/20 z-[100]">
         <motion.div
-          className="h-full bg-red-500 origin-left"
+          className="h-full bg-red-500 origin-left rounded"
           style={{ scaleX: scrollProgress / 100 }}
           transition={{ ease: "easeOut", duration: 0.3 }}
         />
       </div>
 
-      {/* Desktop navigation — скрыта на мобильных */}
-      <nav className="hidden sm:block fixed top-0 left-0 w-full z-50 py-4 px-4 sm:px-0 bg-white/30 backdrop-blur-lg shadow-lg border-b border-white/20">
-        <div className="max-w-6xl mx-auto justify-center flex gap-8 relative z-10">
+      {/* Navbar — видна только на десктопе */}
+      <nav className="hidden sm:block fixed top-0 left-0 w-full z-50 py-3 px-4 sm:px-0 bg-white/30 backdrop-blur-lg shadow-lg border-b border-white/20">
+        <div className="flex max-w-6xl mx-auto justify-center gap-8">
           {sections.map((section) => {
             const label =
               section === "footer"
                 ? "Contact"
                 : section.charAt(0).toUpperCase() + section.slice(1);
+            const isActive = activeSection === section;
 
             return (
               <button
                 key={section}
-                onClick={() =>
-                  document
-                    .getElementById(section)
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="group relative font-extrabold tracking-wide uppercase text-xl text-black/80 hover:text-red-500 transition"
+                onClick={() => handleClick(section)}
+                className={`group relative font-extrabold tracking-wide uppercase text-xl transition
+                  ${
+                    isActive
+                      ? "text-red-500"
+                      : "text-black/80 hover:text-red-500"
+                  }`}
               >
                 {label}
                 <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-1 bg-red-500 rounded-full group-hover:w-full transition-all duration-300" />
