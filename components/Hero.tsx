@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 interface HeroProps {
@@ -22,24 +23,30 @@ export default function Hero({ onScroll }: HeroProps) {
     >
       {/* ===== PARALLAX LAYERS ===== */}
 
-      {/* Background */}
+      {/* Background image — LCP optimized */}
       <motion.div
-        initial={false}
-        style={{ y: bgY, backgroundImage: "url('/1.png')" }}
-        className="absolute inset-0 bg-cover bg-center z-0"
-      />
+        style={{ y: bgY, willChange: "transform" }}
+        className="absolute inset-0 z-0"
+      >
+        <Image
+          src="/1.png"
+          alt="NordWave background"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+      </motion.div>
 
       {/* Fog */}
       <motion.div
-        initial={false}
-        style={{ y: fogY }}
+        style={{ y: fogY, willChange: "transform" }}
         className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_50%_65%,rgba(255,255,255,0.08),transparent_70%)]"
       />
 
       {/* Light */}
       <motion.div
-        initial={false}
-        style={{ y: lightY }}
+        style={{ y: lightY, willChange: "transform" }}
         className="absolute inset-0 z-[2] bg-[radial-gradient(circle_at_50%_40%,rgba(255,0,0,0.15),transparent_60%)]"
       />
 
@@ -53,7 +60,7 @@ export default function Hero({ onScroll }: HeroProps) {
         animate="visible"
         variants={{ visible: { transition: { staggerChildren: 0.04 } } }}
       >
-        {/* Title – stagger letters */}
+        {/* Title */}
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 flex flex-wrap justify-center">
           {title.split("").map((char, i) => (
             <motion.span
@@ -85,9 +92,9 @@ export default function Hero({ onScroll }: HeroProps) {
           go.
         </motion.p>
 
-        {/* ===== CTA ===== */}
+        {/* CTA */}
         <div className="flex flex-col sm:flex-row gap-5 justify-center">
-          {/* Buy Now */}
+          {/* Buy */}
           <motion.button
             onClick={() => onScroll("pricing")}
             whileHover={{
@@ -105,7 +112,7 @@ export default function Hero({ onScroll }: HeroProps) {
             />
           </motion.button>
 
-          {/* Learn More – glass */}
+          {/* Learn */}
           <motion.button
             onClick={() => onScroll("features")}
             whileHover={{
@@ -126,7 +133,7 @@ export default function Hero({ onScroll }: HeroProps) {
         </div>
       </motion.div>
 
-      {/* ===== SCROLL ARROW ===== */}
+      {/* Scroll arrow */}
       <motion.div
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
         animate={{ y: [0, 10, 0] }}
