@@ -10,14 +10,14 @@ const GradientButton: React.FC<{ text: string }> = ({ text }) => {
       whileTap={{ scale: 0.95 }}
       className="relative px-8 py-3 rounded-xl font-semibold text-white overflow-hidden shadow-lg transition-all duration-300 bg-red-600"
     >
+      {/* Текст всегда поверх */}
       <span className="relative z-10">{text}</span>
 
-      {/* Градиентная анимация */}
+      {/* Градиентная подсветка при наведении */}
       <motion.div
-        className="absolute inset-0 rounded-xl"
+        className="absolute inset-0 rounded-xl pointer-events-none"
         initial={{ opacity: 0 }}
         whileHover={{ opacity: 1 }}
-        whileTap={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
         style={{
           background: "linear-gradient(90deg, #7f00ff, #e100ff)",
@@ -67,12 +67,7 @@ export default function Pricing() {
       id="pricing"
       className="py-20 px-4"
       style={{
-        background: `linear-gradient(
-          to bottom,
-          #000000 0%,
-          #4b5563 50%,
-          #9ca3af 100%
-        )`,
+        background: `linear-gradient(to bottom, #000000 0%, #4b5563 50%, #9ca3af 100%)`,
       }}
     >
       <h2 className="text-3xl sm:text-4xl font-bold text-center mb-6 text-white">
@@ -90,12 +85,11 @@ export default function Pricing() {
             key={i}
             whileHover={{ scale: tier.featured ? 1.05 : 1.03 }}
             transition={{ duration: 0.3 }}
-            className={`relative rounded-2xl p-8 flex flex-col justify-between text-center w-full sm:w-1/3
-              ${
-                tier.featured
-                  ? "bg-white shadow-2xl border-2 border-red-400"
-                  : "bg-white shadow-lg"
-              }`}
+            className={`relative rounded-2xl p-8 flex flex-col justify-between text-center w-full sm:w-1/3 ${
+              tier.featured
+                ? "bg-white shadow-2xl border-2 border-red-400"
+                : "bg-white shadow-lg"
+            }`}
           >
             {tier.featured && (
               <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-500 text-white px-4 py-1 text-xs font-bold rounded-full shadow-md">
@@ -108,7 +102,6 @@ export default function Pricing() {
                 {tier.name}
               </h3>
 
-              {/* Цена со скидкой */}
               <p className="text-lg mb-6">
                 <span className="line-through text-gray-400 mr-2">
                   {tier.oldPrice}

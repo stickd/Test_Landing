@@ -53,7 +53,7 @@ export default function Footer() {
       transition={{ duration: 0.6 }}
       className="bg-black text-white py-12 px-4 relative overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto text-center text-gray-400 space-y-8 relative z-10">
+      <div className="max-w-6xl mx-auto text-center text-white-400 space-y-8 relative z-10">
         <p>&copy; 2025 NordWave. All rights reserved.</p>
 
         <form
